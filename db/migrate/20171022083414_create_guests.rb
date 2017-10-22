@@ -4,7 +4,7 @@ class CreateGuests < ActiveRecord::Migration[5.1]
       t.string :name
       t.string :email
       t.string :password_digest
-      t.table :references
+      t.references :table, foreign_key: true
       t.integer :ticket
       t.text :restrictions
 
