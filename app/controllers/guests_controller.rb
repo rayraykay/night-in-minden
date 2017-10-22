@@ -6,13 +6,11 @@ class GuestsController < ApplicationController
 	end
 
 	def new
+		redirect_to root_path if current_guest
 	end
 	
 	def create
 		@new_guest = Guest.new(guest_params)
-		
-		puts params[:ticket]
-		puts params[:email]
 		
 		if @new_guest.save
 			flash[:success] = 'Welcome to a Night in Minden!'
@@ -29,7 +27,7 @@ class GuestsController < ApplicationController
 	end
 	
 	def edit
-		redirect_to root_path if params[:id] != current_guest.id
+		redirect_to login_path if params[:id].to_i != current_guest.id
 	end
 	
 	def update
