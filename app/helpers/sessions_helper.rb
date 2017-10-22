@@ -19,4 +19,16 @@ module SessionsHelper
 		cookies.signed[:guest_id] = nil
 		@current_guest = nil
 	end
+	
+	def log_in_admin (admin)
+		cookies.signed[:admin_id] = admin.id
+	end
+	
+	def current_admin
+		@current_admin ||= Admin.find_by(id: cookies.signed[:admin_id])
+	end
+	
+	def logged_in_admin?
+		!current_admin.nil?
+	end
 end

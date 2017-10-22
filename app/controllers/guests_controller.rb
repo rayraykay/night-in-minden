@@ -17,11 +17,24 @@ class GuestsController < ApplicationController
 		if @new_guest.save
 			flash[:success] = 'Welcome to a Night in Minden!'
 			log_in @new_guest
-			redirect_to '/'
+			redirect_to root_path
 		else
-			flash.now[:danger] = 'There was something wrong with signup. Please try again.'
+			flash.now[:danger] = []
+			for error in @new_guest.errors.full_messages
+				flash.now[:danger].push(error)
+			end
+			
+			puts @new_guest.errors.full_messages.count.to_s + ' ERRORS AKSDJFKALSJFSALFJDAL'
+			
 			render 'new'
 		end
+	end
+	
+	def edit
+		redirect_to root_path if params[:id] != current_guest.id
+	end
+	
+	def update
 	end
 	
 	private
