@@ -1,4 +1,6 @@
 class StaticPagesController < ApplicationController
-  def test
+  skip_before_action :require_login
+
+  def index
   end
 end
