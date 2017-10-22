@@ -2,19 +2,20 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-h1 {
-	position: relative;
-	display: block;
-	
-	text-align: center;
-}
-
 .welcome {
 	position: relative;
 
 	.links {
         text-align: center;
     }
+	
+	h1 {
+	position: relative;
+	display: block;
+	
+	text-align: center;
+	color: rgb(0,0,0);
+}
 }
 
 .alert {

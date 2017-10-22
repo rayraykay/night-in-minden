@@ -16,12 +16,12 @@
         </div>
 		
 		<div class="form-group">
-			<%= f.label :email %>
+			<%= f.label :email, 'UTOR E-mail' %>
 			<%= f.email_field :email, :class => 'form-control' %>
 		</div>
 
 		<div class="form-group">
-			<%= f.label :ticket %>
+			<%= f.label :ticket, 'Ticket #' %>
 			<%= f.number_field :ticket, in: 1..ticket_count, step: 1, :class => 'form-control' %>
 		</div>
 		

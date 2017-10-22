@@ -1,2 +1,11 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+body {
+	background-color: black;
+	color: white;
+}
+
+ul {
+	text-align: left;
+}

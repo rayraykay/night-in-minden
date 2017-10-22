@@ -1,7 +1,9 @@
 header {
     position: relative;
 
-    .current-user {
-        background-color: rgb(85, 111, 120);
-    }
+	.container-fluid {
+		li {
+			color: black;
+		}
+	}
 }

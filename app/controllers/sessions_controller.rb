@@ -6,12 +6,10 @@ class SessionsController < ApplicationController
 	end
 	
 	def create
-		guest = Guest.find_by(email: params[:email])
+		guest = Guest.find_by(email: params[:session][:email])
 		
-		puts params[:email]
-		
-		if guest && guest.authenticate(params[:password])
-			log_in user
+		if guest && guest.authenticate(params[:session][:password])
+			log_in guest
 			redirect_to root_path
 		else
 			flash.now[:danger] = "Invalid email/password combination."
