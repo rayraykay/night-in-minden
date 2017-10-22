@@ -24,8 +24,6 @@ class GuestsController < ApplicationController
 				flash.now[:danger].push(error)
 			end
 			
-			puts @new_guest.errors.full_messages.count.to_s + ' ERRORS AKSDJFKALSJFSALFJDAL'
-			
 			render 'new'
 		end
 	end

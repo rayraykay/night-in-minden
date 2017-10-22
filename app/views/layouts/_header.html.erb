@@ -6,7 +6,7 @@
 
                 <% if logged_in? %>
                     <li><%= link_to 'Sign Out', logout_path %></li>
-					<li><%= link_to 'Personal Info', guest_edit_path(current_guest) %></li>
+					<li><%= link_to 'Personal Info', edit_guest_path(current_guest) %></li>
                     <li><a class="current-guest">Currently signed in as: <%= current_guest[:first_name] %></a></li>
                 <% end %>
             </ul>
