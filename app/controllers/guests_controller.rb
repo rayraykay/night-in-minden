@@ -1,5 +1,5 @@
 class GuestsController < ApplicationController
-	skip_before_action :require_login, :only => [:new, :create, :edit]
+	skip_before_action :require_login, :only => [:new, :create, :edit, :update]
 
 	# for admin side
 	def index
@@ -31,6 +31,17 @@ class GuestsController < ApplicationController
 	end
 	
 	def update
+		if current_guest.update_attributes(guest_params)
+			flash[:success] = 'You have changed your information.'
+			render 'edit'
+		else
+			flash.now[:danger] = []
+			for error in current_guest.errors.full_messages
+				flash.now[:danger].push(error)
+			end
+			
+			render 'edit'
+		end
 	end
 	
 	private

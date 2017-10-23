@@ -1,0 +1,34 @@
+<div class="form-group">
+	<%= f.label :first_name %>
+	<%= f.text_field :first_name, :class => 'form-control' %>
+</div>
+
+<div class="form-group">
+	<%= f.label :last_name %>
+	<%= f.text_field :last_name, :class => 'form-control' %>
+</div>
+
+<div class="form-group">
+	<%= f.label :email, 'UTOR E-mail' %>
+	<%= f.email_field :email, :class => 'form-control' %>
+</div>
+
+<div class="form-group">
+	<%= f.label :ticket, 'Ticket #' %>
+	<%= f.number_field :ticket, in: 1..ticket_count, step: 1, :class => 'form-control' %>
+</div>
+
+<div class="form-group">
+	<%= f.label :password %>
+	<%= f.password_field :password, :class => 'form-control' %>
+</div>
+
+<div class="form-group">
+	<%= f.label :password_confirmation %>
+	<%= f.password_field :password_confirmation, :class => 'form-control' %>
+</div>
+
+<div class="form-group">
+	<%= f.label :restrictions, "Dietary Restrictions (optional)" %>
+	<%= f.text_field :restrictions, :class => 'form-control' %>
+</div>

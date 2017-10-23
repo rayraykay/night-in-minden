@@ -5,5 +5,7 @@
 			<%= link_to 'Log In', login_path, :class => 'btn btn-default' %>
 			<%= link_to 'Sign Up', signup_path, :class => 'btn btn-primary' %>
 		</div>
+	<% else %>
+		<p>You are now logged in. You may change your table and your personal information by clicking on the links up top.</p>
 	<% end %>
 </div>
