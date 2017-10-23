@@ -20,7 +20,9 @@
 					<% end %>
 				</tbody>
 			</table>
-			<% if table.guests.count >= table.max_capacity %>
+			<% if is_prof_table?(table.id) %>
+				<%= link_to 'Table Unavailable', table_selection_path, :class => 'btn btn-danger' %>
+			<% elsif table.guests.count >= table.max_capacity %>
 				<%= link_to 'Table Full', table_selection_path, :class => 'btn btn-warning' %>
 			<% elsif current_guest.table != table %>
 				<%= link_to 'Join this Table', table_selection_path(:table => table.id), { :method => :post, :class => 'btn btn-success' } %>
