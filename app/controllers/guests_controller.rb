@@ -4,6 +4,7 @@ class GuestsController < ApplicationController
 
 	# for admin side
 	def index
+		@guests = Guest.all
 	end
 
 	def new
