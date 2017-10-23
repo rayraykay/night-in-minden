@@ -31,7 +31,17 @@ class GuestsController < ApplicationController
 	end
 	
 	def update
-		if current_guest.update_attributes(guest_params)
+		permitted_params = guest_params
+	
+		# make changing password optional
+		if params[:guest][:password].empty? && params[:guest][:password_confirmation].empty?
+			permitted_params = params.require(:guest).permit(:first_name, :last_name, :email, :ticket, :restrictions)
+			puts permitted_params
+		end
+		
+		puts permitted_params
+			
+		if current_guest.update_attributes(permitted_params)
 			flash[:success] = 'You have changed your information.'
 			render 'edit'
 		else
@@ -46,6 +56,6 @@ class GuestsController < ApplicationController
 	
 	private
 		def guest_params
-			params.require(:guest).permit(:first_name, :last_name, :email, :password, :password_confirmation, :ticket)
+			params.require(:guest).permit(:first_name, :last_name, :email, :password, :password_confirmation, :ticket, :restrictions)
 		end
 end
