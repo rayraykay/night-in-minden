@@ -1,5 +1,6 @@
 class GuestsController < ApplicationController
-	skip_before_action :require_login, :only => [:new, :create, :edit, :update]
+	before_action :require_guest, :except 	=> [:index]
+	before_action :require_admin, :only 	=> [:index]
 
 	# for admin side
 	def index
