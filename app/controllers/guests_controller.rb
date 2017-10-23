@@ -1,13 +1,12 @@
 class GuestsController < ApplicationController
-	before_action :require_guest, :except 	=> [:index]
-	before_action :require_admin, :only 	=> [:index]
+	before_action :require_admin_or_guest, 	:except => [:index, :new, :create]
+	before_action :require_admin, 			:only 	=> [:index]
 
 	# for admin side
 	def index
 	end
 
 	def new
-		redirect_to root_path if current_guest
 	end
 	
 	def create
@@ -15,8 +14,12 @@ class GuestsController < ApplicationController
 		@new_guest = Guest.new(guest_params)
 		
 		if @new_guest.save
-			flash[:success] = 'Welcome to a Night in Minden!'
-			log_in @new_guest
+			if logged_in_admin?
+				flash.now[:success] = 'Welcome to a Night in Minden!'
+				log_in @new_guest
+			else
+				flash.now[:success] = 'You have added guest ' + @new_guest.first_name + ' ' + @new_guest.last_name
+			end
 			redirect_to root_path
 		else
 			flash.now[:danger] = []
@@ -29,12 +32,26 @@ class GuestsController < ApplicationController
 	end
 	
 	def edit
-		redirect_to login_path if params[:id].to_i != current_guest.id
+		if logged_in_admin?
+			@guest = Guest.find_by(id: params[:id])
+		elsif logged_in?
+			redirect_to login_path if params[:id].to_i != current_guest.id
+			@guest = current_guest
+		else
+			redirect_to login_path
+		end
 	end
 	
 	def update
 		strip_space_from_names
 		permitted_params = guest_params
+		
+		# safe because edit
+		if logged_in_admin?
+			@guest = Guest.find_by(id: params[:id])
+		else
+			@guest = current_guest
+		end
 	
 		# make changing password optional
 		if params[:guest][:password].empty? && params[:guest][:password_confirmation].empty?
@@ -43,13 +60,14 @@ class GuestsController < ApplicationController
 		end
 		
 		puts permitted_params
+		puts @guest.first_name
 			
-		if current_guest.update_attributes(permitted_params)
-			flash[:success] = 'You have changed your information.'
+		if @guest.update_attributes(permitted_params)
+			flash.now[:success] = 'You have changed your information.'
 			render 'edit'
 		else
 			flash.now[:danger] = []
-			for error in current_guest.errors.full_messages
+			for error in @guest.errors.full_messages
 				flash.now[:danger].push(error)
 			end
 			

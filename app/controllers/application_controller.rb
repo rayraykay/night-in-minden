@@ -12,9 +12,10 @@ class ApplicationController < ActionController::Base
 	end
 	
 	def require_admin
-	
+		redirect_to root_path unless current_admin
 	end
 	
 	def require_admin_or_guest
+		redirect_to root_path unless current_admin || current_guest
 	end
 end

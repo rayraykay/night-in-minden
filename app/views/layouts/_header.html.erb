@@ -9,6 +9,9 @@
 					<li><%= link_to 'Personal Info', edit_guest_path(current_guest) %></li>
 					<li><%= link_to 'Sign Out', logout_path %></li>
                     <li><a class="current-guest">Currently signed in as: <%= current_guest[:first_name] %></a></li>
+				<% elsif logged_in_admin? %>
+					<li><%= link_to 'Table List', table_list_path %></li>
+					<li><%= link_to 'Sign Out (Admin)', admin_logout_path %></li>
 				<% else %>
 					<li><%= link_to 'Table Layout', table_selection_path %></li>
 					<li><%= link_to 'Log In', login_path %></li>

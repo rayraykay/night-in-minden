@@ -10,4 +10,10 @@ class Guest < ApplicationRecord
   
   # will need to be put later by the user
   belongs_to :table, optional: true
+  
+  def list_names_to_console
+	Guest.all.each do |g|
+		puts g.first_name + ' ' + g.last_name
+	end
+  end
 end

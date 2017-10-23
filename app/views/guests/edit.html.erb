@@ -5,7 +5,7 @@
     <h1>Edit Personal Information</h1>
 
     <!--need to name the resource, then corresponding URL-->
-    <%= form_for(current_guest, url: guest_path(current_guest)) do |f| %>
+    <%= form_for(@guest, url: guest_path(@guest)) do |f| %>
         <div class="form-group">
 			<%= f.label :first_name %>
 			<%= f.text_field :first_name, :class => 'form-control' %>

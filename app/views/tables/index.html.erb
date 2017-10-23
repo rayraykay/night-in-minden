@@ -1,0 +1,23 @@
+<% provide(:title, "Table List") %>
+
+<div class="tables col-md-8 col-md-offset-2">
+	<% @tables.each do |table| %>
+		<div class="table-list">
+			<h1>Table <%= table.id %> (<%= table.guests.count.to_s + '/' + table.max_capacity.to_s %>)</h1>
+			<table class="table table-hover table-responsive">
+				<thead>
+					<th>Guest Names</th>
+				</thead>
+				<tbody>
+					<% i = 1 %>
+					<% table.guests.each do |guest| %>
+						<tr>
+							<td><%= i.to_s + '. ' + guest.first_name + ' ' + guest.last_name %></td>
+						</tr>
+						<% i += 1 %>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+	<% end %>
+</div>

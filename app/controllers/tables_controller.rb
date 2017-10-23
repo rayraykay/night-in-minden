@@ -1,6 +1,11 @@
 class TablesController < ApplicationController
 	before_action :require_guest, :only => [:select_table]
+	before_action :require_admin, :only => [:index]
 
+	def index
+		@tables = Table.all
+	end
+	
 	def selection
 		flash.now[:danger] = 'You must log in to book a table or fully view names.' unless logged_in?
 	
