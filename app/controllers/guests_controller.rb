@@ -11,6 +11,7 @@ class GuestsController < ApplicationController
 	end
 	
 	def create
+		strip_space_from_names
 		@new_guest = Guest.new(guest_params)
 		
 		if @new_guest.save
@@ -32,6 +33,7 @@ class GuestsController < ApplicationController
 	end
 	
 	def update
+		strip_space_from_names
 		permitted_params = guest_params
 	
 		# make changing password optional
@@ -58,5 +60,10 @@ class GuestsController < ApplicationController
 	private
 		def guest_params
 			params.require(:guest).permit(:first_name, :last_name, :email, :password, :password_confirmation, :ticket, :restrictions)
+		end
+		
+		def strip_space_from_names
+			params[:guest][:first_name] = params[:guest][:first_name].strip
+			params[:guest][:last_name] = params[:guest][:last_name].strip
 		end
 end

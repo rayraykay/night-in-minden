@@ -3,12 +3,16 @@
         <nav>
             <ul class="nav navbar-nav navbar-left">
                 <li><%= link_to 'Home', root_path %></li>
-
+					
                 <% if logged_in? %>
-                    <li><%= link_to 'Sign Out', logout_path %></li>
-					<li><%= link_to 'Personal Info', edit_guest_path(current_guest) %></li>
 					<li><%= link_to 'Table Selection', table_selection_path %></li>
+					<li><%= link_to 'Personal Info', edit_guest_path(current_guest) %></li>
+					<li><%= link_to 'Sign Out', logout_path %></li>
                     <li><a class="current-guest">Currently signed in as: <%= current_guest[:first_name] %></a></li>
+				<% else %>
+					<li><%= link_to 'Table Layout', table_selection_path %></li>
+					<li><%= link_to 'Log In', login_path %></li>
+					<li><%= link_to 'Sign Up', signup_path %></li>
                 <% end %>
             </ul>
         </nav>
