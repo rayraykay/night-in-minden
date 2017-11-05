@@ -4,7 +4,14 @@ class GuestsController < ApplicationController
 
 	# for admin side
 	def index
-		@guests = Guest.all
+		@guests = Guest.all.sort_by do |g|
+				if g.table_id.nil?
+					-1
+				else
+					g.table_id
+				end
+			end
+		
 	end
 
 	def new
